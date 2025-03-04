@@ -4,7 +4,7 @@ This script generates an RSS feed from your Storygraph reading history. It fetch
 
 ## Prerequisites
 
-- Node.js (v14 or higher)
+- Node.js 
 - npm (Node Package Manager)
 - A Storygraph account
 
