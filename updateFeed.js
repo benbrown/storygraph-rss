@@ -53,6 +53,9 @@ async function fetchBooksPage(page) {
         // Get the cover image URL
         const imageUrl = $book.find('.cover-image-column img').attr('src');
         
+        // Get the book URL from the link
+        const bookUrl = $book.find('.cover-image-column a').attr('href');
+        
         // Get the finished date from the action menu, removing the "click to edit read date" text
         const dateText = $book.find('.action-menu a p').first().text().trim();
         const finishedDate = dateText.replace('Finished ', '').replace('Click to edit read date', '').trim();
@@ -63,6 +66,7 @@ async function fetchBooksPage(page) {
                 title,
                 author,
                 imageUrl,
+                bookUrl,
                 finishedDate
             });
         }
@@ -114,7 +118,7 @@ async function generateRSSFeed() {
                         feed.item({
                             title: `Finished ${book.title} by ${book.author}`,
                             description: `I read ${book.title} by ${book.author}.`,
-                            url: `https://app.thestorygraph.com/books-read/${STORYGRAPH_USER}`,
+                            url: book.bookUrl || `https://app.thestorygraph.com/books-read/${STORYGRAPH_USER}`,
                             date: date,
                             guid: `${book.title}-${book.author}-${book.finishedDate}`,
                             enclosure: {
