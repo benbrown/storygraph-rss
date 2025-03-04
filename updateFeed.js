@@ -53,8 +53,9 @@ async function fetchBooksPage(page) {
         // Get the cover image URL
         const imageUrl = $book.find('.cover-image-column img').attr('src');
         
-        // Get the book URL from the link
-        const bookUrl = $book.find('.cover-image-column a').attr('href');
+        // Get the book URL from the link and make it absolute
+        const relativeUrl = $book.find('.cover-image-column a').attr('href');
+        const bookUrl = relativeUrl ? `https://app.thestorygraph.com${relativeUrl}` : null;
         
         // Get the finished date from the action menu, removing the "click to edit read date" text
         const dateText = $book.find('.action-menu a p').first().text().trim();
